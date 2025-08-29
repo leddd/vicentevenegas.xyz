@@ -1,16 +1,13 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { PageTransition } from "./page-transition"; // ✅ you’ll create this file
+import Providers from "./providers";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const space = Space_Grotesk({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-space-grotesk",
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -25,11 +22,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-offblack text-textPrimary`}
-      >
-        {/* Add navbar here if you want */}
-        <PageTransition>{children}</PageTransition>
+      <body className={`${space.variable} font-sans antialiased bg-black text-[#ededed]`}>
+        <Providers>
+          <header className="header-sticky">
+            <div className="container header-row">
+              <div className="brand">vicentevenegas.</div>
+              <nav className="nav-pill nav-center" aria-label="Primary">
+                <a href="#projects">Project</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+              </nav>
+            </div>
+          </header>
+          <PageTransition>{children}</PageTransition>
+        </Providers>
         {/* Add footer here if you want */}
       </body>
     </html>
