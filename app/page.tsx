@@ -1,103 +1,42 @@
-import Image from "next/image";
+'use client'
+import { motion } from 'framer-motion'
+import Section from '@/components/Section'
+import ProjectCard from '@/components/ProjectCard'
+import { projects } from '@/lib/projects'
 
-export default function Home() {
+const parent = { hidden:{opacity:0}, show:{opacity:1, transition:{staggerChildren:0.08}} }
+const child  = { hidden:{y:12,opacity:0}, show:{y:0,opacity:1, transition:{duration:0.3}} }
+
+export default function Home(){
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      <Section className="mt-16">
+        <motion.div variants={parent} initial="hidden" animate="show" className="grid gap-6">
+          <motion.h1 variants={child} className="text-[48px] font-bold leading-[1.1] max-w-[16ch]">UX/UI designer creating products from research to interface.</motion.h1>
+          <motion.p variants={child} className="text-[32px] font-medium text-textSecondary max-w-[32ch]">Exploring the intersection of interfaces, code, and tangible design.</motion.p>
+        </motion.div>
+      </Section>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      <Section className="mt-16 hidden xl:block">
+        {/* Desktop 6‑column grid with 220px side margins, 20px gutters, 230px columns */}
+        <div className="grid-6">
+          {/* 3 columns wide cards by default (spanning) */}
+          {projects.map((p) => (
+            <div key={p.slug} className="col-span-3">
+              <ProjectCard href={`/projects/${p.slug}`} title={p.title} description={p.description} image={p.image} />
+            </div>
+          ))}
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+      </Section>
+
+      {/* Mobile/Tablet responsive grid (stack → 2 cols) */}
+      <Section className="mt-10 xl:hidden">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {projects.map((p) => (
+            <ProjectCard key={p.slug} href={`/projects/${p.slug}`} title={p.title} description={p.description} image={p.image} />
+          ))}
+        </div>
+      </Section>
+    </>
+  )
 }

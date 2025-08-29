@@ -1,26 +1,26 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+:root { color-scheme: dark; }
+html, body { height: 100%; }
+body { @apply bg-offblack text-textPrimary antialiased; }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* 6‑column grid helper for ≥ 1280px */
+@layer utilities {
+  .grid-6 {
+    display: grid;
+    grid-template-columns: repeat(6, theme('spacing.col'));
+    grid-column-gap: theme('spacing.gutter');
   }
+  .frame-margins { padding-left: theme('spacing.marginX'); padding-right: theme('spacing.marginX'); }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
 }
+
+/* Link + focus styles */
+a { @apply underline-offset-2 decoration-stroke hover:decoration-textPrimary; }
+:focus-visible { outline: 2px solid #5B9BFF; outline-offset: 2px; }
