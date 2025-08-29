@@ -2,14 +2,20 @@ import React from 'react'
 
 export default function Nav() {
   return (
-    <div className="px-[220px] flex justify-center items-center py-6">
+    <div className="px-[220px] flex justify-center items-center py-4">
       <nav
-        className="inline-flex items-center gap-6 px-[18px] py-[10px] bg-[#151515] border border-[#3a3a3a] rounded-full text-[16px] font-light"
+          className="
+            inline-flex items-center gap-12
+            px-12 py-3
+            bg-surface border border-stroke
+            rounded-full
+            text-[16px] font-light
+          "
         aria-label="Primary"
       >
-        <a className="text-[#ededed] no-underline hover:opacity-90" href="#projects">Project</a>
-        <a className="text-[#ededed] no-underline hover:opacity-90" href="#about">About</a>
-        <a className="text-[#ededed] no-underline hover:opacity-90" href="#contact">Contact</a>
+        <a className="text-gray-300 hover:text-white no-underline" href="#projects">Project</a>
+        <a className="text-gray-300 hover:text-white no-underline" href="#about">About</a>
+        <a className="text-gray-300 hover:text-white no-underline" href="#contact">Contact</a>
       </nav>
     </div>
   )
