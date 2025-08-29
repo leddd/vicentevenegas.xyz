@@ -7,7 +7,7 @@ export default function Nav() {
           className="
             inline-flex items-center gap-12
             px-12 py-3
-            bg-surface border border-stroke
+            bg-[#151515] border border-[#3a3a3a]
             rounded-full
             text-[16px] font-light
           "
