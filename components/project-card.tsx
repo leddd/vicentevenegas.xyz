@@ -20,7 +20,7 @@ export default function ProjectCard({ href, title, summary, image, alt, priority
   return (
     <motion.article
       style={{ backgroundColor: '#111111', borderColor: '#2A2A2A' }}
-      whileHover={{ backgroundColor: '#151515', borderColor: '#3A3A3A' }}
+      whileHover={{ backgroundColor: '#252525ff', borderColor: '#3A3A3A' }}
       transition={{ duration: 0.2, ease: 'easeOut' }}
       className="rounded-2xl border overflow-hidden"
       variants={variants}
