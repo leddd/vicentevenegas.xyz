@@ -1,58 +1,47 @@
 // components/projects-grid.tsx
-'use client';
-
+'use client'
 import { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import ProjectCard from '@/components/project-card';
+import { projects } from '@/lib/projects';
 
 export default function ProjectsGrid() {
-  const testProjects = Array.from({ length: 6 }).map((_, i) => ({
-    slug: `test-${i}`,
-    title: 'Djavu',
-    summary:
-      'DIY recording station for learning the basics of composition and music production.',
-    image: '/images/djavu.png',
-    alt: 'Djavu device on a table',
-  }));
+  const list = projects
+    .filter(p => !p.draft)
+    .sort((a, b) =>
+      // optional: newest first by date
+      (b.date ?? '').localeCompare(a.date ?? '')
+    );
 
-  const left = testProjects.slice(0, 3);
-  const right = testProjects.slice(3, 6);
+  // unlimited items: alternate into two columns
+  const left  = list.filter((_, i) => i % 2 === 0);
+  const right = list.filter((_, i) => i % 2 === 1);
 
-  // Refs to measure the first card and set CSS var on the section
   const sectionRef = useRef<HTMLElement | null>(null);
   const firstCardRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (!firstCardRef.current || !sectionRef.current) return;
-
     const updateVar = () => {
-      const h = firstCardRef.current!.getBoundingClientRect().height;
-      sectionRef.current!.style.setProperty('--card-h', `${h}px`);
+      const cardEl = firstCardRef.current;
+      const sectionEl = sectionRef.current;
+      if (!cardEl || !sectionEl) return;
+      sectionEl.style.setProperty('--card-h', `${cardEl.getBoundingClientRect().height}px`);
     };
 
-    const ro = new ResizeObserver(updateVar);
-    ro.observe(firstCardRef.current);
+    const cardEl = firstCardRef.current;
+    const sectionEl = sectionRef.current;
+    if (!cardEl || !sectionEl) return;
 
-    // Also update on load/resize for safety
     updateVar();
-    window.addEventListener('resize', updateVar);
-
-    return () => {
-      ro.disconnect();
-      window.removeEventListener('resize', updateVar);
-    };
+    const ro = new ResizeObserver(updateVar);
+    ro.observe(cardEl);
+    const onResize = () => updateVar();
+    window.addEventListener('resize', onResize);
+    return () => { ro.disconnect(); window.removeEventListener('resize', onResize); };
   }, []);
 
-  const container = {
-    hidden: {},
-    show: {
-      transition: { delayChildren: 0.3 }, // align with subline Typewriter delay
-    },
-  };
-  const column = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.1 } },
-  };
+  const container = { hidden: {}, show: { transition: { delayChildren: 0.3 } } };
+  const column = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
 
   return (
     <motion.section
@@ -64,7 +53,7 @@ export default function ProjectsGrid() {
       initial="hidden"
       animate="show"
     >
-      {/* Left column: cols 2–3 */}
+      {/* Left column */}
       <motion.div variants={column} className="col-span-6 lg:col-span-2 lg:col-start-2 flex flex-col gap-6">
         {left.map((p, i) => (
           <div key={p.slug} ref={i === 0 ? firstCardRef : undefined}>
@@ -72,15 +61,15 @@ export default function ProjectsGrid() {
               href={`/projects/${p.slug}`}
               title={p.title}
               summary={p.summary}
-              image={p.image}
+              image={p.cover}
               alt={p.alt}
-              priority={i === 0}
+              priority={i === 0} // only the very first gets priority
             />
           </div>
         ))}
       </motion.div>
 
-      {/* Right column: cols 4–5, offset = half a card */}
+      {/* Right column, offset by half a card */}
       <motion.div
         variants={column}
         className="col-span-6 lg:col-span-2 lg:col-start-4 flex flex-col gap-6"
@@ -92,7 +81,7 @@ export default function ProjectsGrid() {
             href={`/projects/${p.slug}`}
             title={p.title}
             summary={p.summary}
-            image={p.image}
+            image={p.cover}
             alt={p.alt}
           />
         ))}

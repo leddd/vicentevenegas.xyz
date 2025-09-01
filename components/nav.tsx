@@ -14,7 +14,7 @@ export default function Nav() {
         className="text-gray-300 hover:text-white no-underline transition-colors duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
         href="#projects"
       >
-        Project
+        Projects
       </a>
       <a
         className="text-gray-300 hover:text-white no-underline transition-colors duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"

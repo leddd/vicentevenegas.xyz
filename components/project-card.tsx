@@ -7,7 +7,7 @@ type Props = {
   href: string
   title: string
   summary: string
-  image: string
+  image?: string
   alt: string
   priority?: boolean
 }
@@ -29,17 +29,19 @@ export default function ProjectCard({ href, title, summary, image, alt, priority
         href={href}
         className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
       >
-        {/* Image: 4:3 aspect drives image height */}
-        <div className="relative aspect-[4/3]">
-          <Image
-            src={image}
-            alt={alt}
-            fill
-            priority={priority}
-            className="object-cover"
-            sizes="(min-width:1280px) 440px, 100vw" /* ~2 cols wide */
-          />
-        </div>
+        {/* Image: only render when provided to avoid empty src */}
+        {image ? (
+          <div className="relative aspect-[4/3]">
+            <Image
+              src={image}
+              alt={alt}
+              fill
+              priority={priority}
+              className="object-cover"
+              sizes="(min-width:1280px) 440px, 100vw" /* ~2 cols wide */
+            />
+          </div>
+        ) : null}
 
         {/* Text: title + exactly two lines */}
         <div className="px-4 pb-4 pt-3">
