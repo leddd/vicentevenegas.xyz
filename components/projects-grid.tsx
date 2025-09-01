@@ -46,7 +46,7 @@ export default function ProjectsGrid() {
   const container = {
     hidden: {},
     show: {
-      transition: { delayChildren: 1.4 }, // align with subline Typewriter delay
+      transition: { delayChildren: 0.3 }, // align with subline Typewriter delay
     },
   };
   const column = {
