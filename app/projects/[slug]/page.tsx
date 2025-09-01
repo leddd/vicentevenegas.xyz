@@ -24,8 +24,8 @@ export default function ProjectPage({ params }: Params) {
   return (
     <article className="container grid-6 gap-y-12 pb-24">
       {/* Hero */}
-      <h1 className="col-all text-[52px] font-bold text-center lg:text-left">{p.title}</h1>
-      <p className="col-span-6 lg:col-span-4 lg:col-start-2 text-center lg:text-left text-[20px] text-white/70">
+      <h1 className="col-span-6 lg:col-span-4 lg:col-start-2 text-[52px] font-bold text-center lg:text-left">{p.title}</h1>
+      <p className="col-span-6 lg:col-span-4 lg:col-start-2 text-center lg:text-left text-[20px] text-white/70 -mt-12">
         {p.summary}
       </p>
 
