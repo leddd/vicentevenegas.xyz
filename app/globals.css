@@ -67,12 +67,12 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-block: 24px; /* same rhythm as content */
+  padding-block: 12px; /* same rhythm as content */
 }
 
 /* Header row: scrolls away, aligned to container paddings */
 .header{
-  padding-block: 24px; /* same rhythm as content */
+  padding-block: 34px; /* same rhythm as content */
 }
 
 /* Neutralize any legacy absolute brand usage */
