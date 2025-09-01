@@ -4,15 +4,19 @@
 *, *::before, *::after { box-sizing: border-box; }
 html, body { height: 100%; }
 body { margin: 0; }
-html, 
-/* Design tokens */
-:root {
-  --background: #000000; /* black */
-  --foreground: #ededed; /* light gray for text */
-  --gutter: 20px;        /* column gutter */
-  --margin: 220px;       /* side margins */
-}
 
+/* Design tokens (fluid with desktop caps) */
+:root{
+  --background: #000000;
+  --foreground: #ffffff;
+
+  /* gutters + side margins scale down smoothly, cap at desktop values */
+  --gutter: clamp(12px, 1.8vw, 20px);
+  --margin: clamp(16px, 6vw, 220px);
+
+  /* intended content width (grid width, not counting side margins) */
+  --content: 1440px;
+}
 
 /* Tailwind v4 theme bindings */
 @theme inline {
@@ -22,7 +26,7 @@ html,
 }
 
 /* Base */
-body {
+body{
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-space-grotesk), system-ui, -apple-system, Segoe UI,
@@ -30,55 +34,68 @@ body {
 }
 
 /* Layout helpers */
-.container {
-  padding-left: var(--margin);
-  padding-right: var(--margin);
+.container{
+  width: 100%;
+  /* Total visual width never exceeds viewport or content+2*margin */
+  max-width: min(100vw, calc(var(--content) + 2 * var(--margin)));
+  margin-inline: auto;
+  padding-inline: var(--margin);
 }
 
-.grid-6 {
+.grid-6{
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   column-gap: var(--gutter);
 }
+.col-all{ grid-column: 1 / -1; }
 
-.col-all {
-  grid-column: 1 / -1;
+/* Sticky navbar (only the pill sticks) */
+.nav-sticky{
+  position: fixed;           /* overlay layer, out of flow */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;             /* on top of everything */
+  pointer-events: none;      /* wrapper won't block clicks */
+}
+.nav-sticky .nav-pill{
+  pointer-events: auto;
 }
 
-/* Sticky header row with vertical alignment */
-.header-sticky {
-  position: sticky;
-  top: 16px; /* adjust if you want tighter to top */
-  z-index: 50;
+/* Center the pill inside the container */
+.nav-wrap{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-block: 24px; /* same rhythm as content */
 }
 
-.header-row {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  column-gap: var(--gutter);
-  align-items: center; /* vertical alignment between brand and nav */
-  padding-top: 24px;
-  padding-bottom: 24px;
-  position: relative; /* allow absolute centering for nav */
+/* Header row: scrolls away, aligned to container paddings */
+.header{
+  padding-block: 24px; /* same rhythm as content */
 }
 
-/* Center nav absolutely within the container */
-.nav-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+/* Neutralize any legacy absolute brand usage */
+.brand-abs{ position: static; top: auto; left: auto; z-index: auto; }
+
+/* Responsive column collapse */
+@media (max-width: 1024px){
+  .grid-6{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px){
+  .grid-6{ grid-template-columns: 1fr; }
+  /* header grid removed in favor of simple padding */
 }
 
 /* Brand */
-.brand {
+.brand{
   font-size: 24px;
   font-weight: 500;
   letter-spacing: -0.01em;
 }
 
 /* Nav pill */
-.nav-pill {
+.nav-pill{
   display: inline-flex;
   align-items: center;
   gap: 24px;
@@ -90,14 +107,6 @@ body {
   font-weight: 300;
   line-height: 1;
 }
+.nav-pill a{ color: #ededed; text-decoration: none; }
+.nav-pill a:hover{ opacity: 0.9; }
 
-.nav-pill a {
-  color: #ededed;
-  text-decoration: none;
-}
-
-.nav-pill a:hover {
-  opacity: 0.9;
-}
-
-/* Sections should wrap content in `.container` to align with margins */

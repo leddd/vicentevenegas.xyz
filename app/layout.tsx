@@ -8,7 +8,7 @@ import Brand from "@/components/brand";
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400","500","600","700"],
 });
 
 export const metadata: Metadata = {
@@ -19,9 +19,21 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={`${spaceGrotesk.variable} font-sans antialiased bg-background text-foreground`}>
-        <Brand />
-        <Nav />
+      <body className={`${spaceGrotesk.variable} font-sans antialiased`}>
+        {/* Brand: scrolls away */}
+        <header className="header">
+          <div className="container">
+            <Brand />
+          </div>
+        </header>
+
+        {/* Nav pill: sticky and horizontally aligned with the same container */}
+        <div className="nav-sticky">
+          <div className="container nav-wrap">
+            <Nav />
+          </div>
+        </div>
+
         <PageTransition>
           <main>{children}</main>
         </PageTransition>
