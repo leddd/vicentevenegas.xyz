@@ -17,6 +17,12 @@ body { margin: 0; }
   /* intended content width (grid width, not counting side margins) */
   --content: 1440px;
   --anchor-offset: 96px;
+
+    /* glow controls */
+  --bg-glow-alpha: 0.2;   /* 0.06–0.12 is a nice range */
+  --bg-glow-height: 1920px; /* how far down the glow fades */
+
+  
 }
 
 html {
@@ -33,10 +39,22 @@ html {
 
 /* Base */
 body{
-  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-space-grotesk), system-ui, -apple-system, Segoe UI,
     Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+
+  /* base color */
+  background-color: var(--background);
+
+  /* top radial glow only */
+  background-image: radial-gradient(
+    3200px var(--bg-glow-height) at 50% -220px,
+    rgb(0 255 255 / var(--bg-glow-alpha)) 0%,
+    rgb(255 255 255 / 0) 60%
+  );
+  background-repeat: no-repeat;
+  background-size: 100% var(--bg-glow-height);
+  background-position: center 0;
 }
 
 /* Layout helpers */
