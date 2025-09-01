@@ -8,7 +8,7 @@ type Props = {
   onDone?: () => void;
 };
 
-export default function Typewriter({ text, speed = 24, startDelay = 0, onDone }: Props) {
+export default function Typewriter({ text, speed = 32, startDelay = 0, onDone }: Props) {
   const [out, setOut] = useState("");
   useEffect(() => {
     let i = 0;
