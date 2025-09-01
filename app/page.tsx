@@ -5,7 +5,7 @@ export default function Page() {
   return (
     <>
       {/* Hero */}
-      <section className="container grid-6 gap-y-0 pt-16 pb-8 mb-48">
+      <section className="container grid-6 gap-y-0 pt-12 pb-8 mb-48">
         {/* Headline (cols 2–4 left aligned; change to col-start-3 for centered) */}
         <h1 className="col-span-6 lg:col-span-3 lg:col-start-2 max-w-[28ch] text-[52px] leading-[0.9] font-bold text-white">
           <SplitWords

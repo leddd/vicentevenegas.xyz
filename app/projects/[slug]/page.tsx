@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { projects, getProject } from "@/lib/projects";
+import { ProjectBlocks } from "@/components/project-blocks";
 
 type Params = { params: { slug: string } };
 
@@ -13,11 +14,7 @@ export async function generateStaticParams() {
 export function generateMetadata({ params }: Params): Metadata {
   const p = getProject(params.slug);
   if (!p) return {};
-  return {
-    title: `${p.title} – Case Study`,
-    description: p.summary,
-    openGraph: { images: [p.cover] },
-  };
+  return { title: `${p.title} – Case Study`, description: p.summary, openGraph: { images: [p.cover] } };
 }
 
 export default function ProjectPage({ params }: Params) {
@@ -25,32 +22,29 @@ export default function ProjectPage({ params }: Params) {
   if (!p) return notFound();
 
   return (
-    <article className="container grid-6 gap-y-8 pb-24">
-      <h1 className="col-all text-[48px] font-bold">{p.title}</h1>
-
-      <p className="col-span-6 lg:col-span-3 lg:col-start-2 text-[20px] text-white/80">
+    <article className="container grid-6 gap-y-12 pb-24">
+      {/* Hero */}
+      <h1 className="col-all text-[52px] font-bold text-center lg:text-left">{p.title}</h1>
+      <p className="col-span-6 lg:col-span-4 lg:col-start-2 text-center lg:text-left text-[20px] text-white/70">
         {p.summary}
       </p>
 
+      {/* Cover */}
       <div className="col-span-6 lg:col-span-4 lg:col-start-2">
-        <Image
-          src={p.cover}
-          alt={p.alt}
-          width={1600}
-          height={1200}
-          className="rounded-xl border border-[#2A2A2A] object-cover"
-        />
+        <div className="relative rounded-2xl border border-[#2A2A2A] overflow-hidden">
+          <Image
+            src={p.cover}
+            alt={p.alt}
+            width={1600}
+            height={1200}
+            className="w-full h-auto object-cover"
+            sizes="(min-width:1024px) 896px, 100vw"
+          />
+        </div>
       </div>
 
-      {/* Replace with your real sections */}
-      <section className="col-span-6 lg:col-span-4 lg:col-start-2 prose prose-invert max-w-none">
-        <h2>Overview</h2>
-        <p>Context, goals, constraints.</p>
-        <h2>Process</h2>
-        <p>Research, decisions, iterations.</p>
-        <h2>Outcome</h2>
-        <p>Impact, what shipped, metrics, learnings.</p>
-      </section>
+      {/* Flexible content */}
+      {p.blocks && <ProjectBlocks blocks={p.blocks} />}
     </article>
   );
 }
