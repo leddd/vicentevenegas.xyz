@@ -13,7 +13,7 @@ export default function Nav() {
           "
         aria-label="Primary"
       >
-        <a className="text-gray-300 hover:text-white no-underline" href="#projects">Project</a>
+        <a className="text-gray-300 hover:text-white no-underline" href="#projects">Projects</a>
         <a className="text-gray-300 hover:text-white no-underline" href="#about">About</a>
         <a className="text-gray-300 hover:text-white no-underline" href="#contact">Contact</a>
       </nav>
