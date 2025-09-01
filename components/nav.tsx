@@ -1,5 +1,6 @@
 "use client"
 import React from 'react'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 export default function Nav() {
   return (
@@ -10,21 +11,23 @@ export default function Nav() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
     >
-      <a
+      <Link
         className="text-gray-300 hover:text-white no-underline transition-colors duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
-        href="#projects"
+        href="/#projects"
       >
         Projects
-      </a>
-      <a
+      </Link>
+      <Link
         className="text-gray-300 hover:text-white no-underline transition-colors duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
-        href="#about"
+        href="/#about"
       >
         About
-      </a>
+      </Link>
       <a
         className="text-gray-300 hover:text-white no-underline transition-colors duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
-        href="#contact"
+        href="mailto:vicente.venegas@uc.cl"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         Contact
       </a>

@@ -25,13 +25,13 @@ export default function Footer() {
           <ul className="flex gap-4">
             {links.map(({ href, label, icon }) => (
               <li key={label}>
-                <a
-                  href={href}
-                  target={href.startsWith("http") ? "_blank" : undefined}
-                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="group inline-flex h-10 w-8 items-center justify-center
-                             text-[white]/70 hover:text-white transition"
-                >
+                  <a
+                    href={href}
+                    target={href.startsWith("http") || href.startsWith("mailto:") ? "_blank" : undefined}
+                    rel={href.startsWith("http") || href.startsWith("mailto:") ? "noopener noreferrer" : undefined}
+                    className="group inline-flex h-10 w-8 items-center justify-center
+                               text-[white]/70 hover:text-white transition"
+                  >
                   {/* Use the SVG as a mask so it follows text color */}
                   <span
                     aria-hidden="true"

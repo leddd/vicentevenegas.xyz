@@ -16,6 +16,12 @@ body { margin: 0; }
 
   /* intended content width (grid width, not counting side margins) */
   --content: 1440px;
+  --anchor-offset: 96px;
+}
+
+html {
+  scroll-behavior: smooth;             /* optional */
+  scroll-padding-top: var(--anchor-offset);
 }
 
 /* Tailwind v4 theme bindings */
