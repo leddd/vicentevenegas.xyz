@@ -19,7 +19,7 @@ export default function Nav() {
       </Link>
       <Link
         className="text-gray-300 hover:text-white no-underline transition-colors duration-200 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
-        href="/#about"
+        href="/about"
       >
         About
       </Link>
