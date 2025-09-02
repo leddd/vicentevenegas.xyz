@@ -3,7 +3,16 @@ import { useState } from "react";
 import Image from "next/image";
 
 export type Img = { src: string; alt: string; w?: number; h?: number };
-export type Vid = { src: string; poster?: string; label?: string };
+export type Vid = {
+  src: string;
+  poster?: string;
+  label?: string;
+  autoplay?: boolean;
+  muted?: boolean;
+  loop?: boolean;
+  playsInline?: boolean;
+  controls?: boolean;
+};
 
 export type Block =
   | { type: "text"; heading?: string; body: string }
@@ -11,11 +20,37 @@ export type Block =
   | { type: "twoUp"; images?: [Img, Img]; videos?: [Vid, Vid] } // 👈 allow videos too
   | { type: "grid2x2"; images: [Img, Img, Img, Img] }
   | { type: "textImage"; side?: "left" | "right"; heading?: string; body: string; image: Img }
-  | { type: "video"; src: string; poster?: string; label?: string }; // aspect is now inferred
+  | {
+      type: "video";
+      src: string;
+      poster?: string;
+      label?: string;
+      autoplay?: boolean;
+      muted?: boolean;
+      loop?: boolean;
+      playsInline?: boolean;
+      controls?: boolean;
+    }; // aspect is now inferred
 
 function AutoAspectVideo({
-  src, poster, label,
-}: { src: string; poster?: string; label?: string }) {
+  src,
+  poster,
+  label,
+  autoplay,
+  muted = true,
+  loop,
+  playsInline = true,
+  controls,
+}: {
+  src: string;
+  poster?: string;
+  label?: string;
+  autoplay?: boolean;
+  muted?: boolean;
+  loop?: boolean;
+  playsInline?: boolean;
+  controls?: boolean;
+}) {
   const [ratio, setRatio] = useState<number>(16 / 9); // safe fallback to prevent CLS
   return (
     <div className="col-span-6 lg:col-span-4 lg:col-start-2">
@@ -24,12 +59,12 @@ function AutoAspectVideo({
         style={{ aspectRatio: ratio }}
       >
         <video
-          autoPlay
-          muted
-          loop
-          playsInline
+          autoPlay={autoplay}
+          muted={muted}
+          loop={loop}
+          playsInline={playsInline}
           preload="metadata"
-          controls={false}
+          controls={controls}
           aria-label={label ?? "Autoplaying clip"}
           onLoadedMetadata={(e) => {
             const v = e.currentTarget;
@@ -53,12 +88,12 @@ function TwoUpAutoVideo({ v }: { v: Vid }) {
   return (
     <div className="relative rounded-2xl border border-[#2A2A2A] overflow-hidden" style={{ aspectRatio: ratio }}>
       <video
-        autoPlay
-        muted
-        loop
-        playsInline
+        autoPlay={v.autoplay}
+        muted={v.muted ?? true}
+        loop={v.loop}
+        playsInline={v.playsInline ?? true}
         preload="metadata"
-        controls={false}
+        controls={v.controls}
         aria-label={v.label ?? "Autoplaying clip"}
         poster={v.poster}
         onLoadedMetadata={(e) => {
@@ -191,7 +226,19 @@ export function ProjectBlocks({ blocks }: { blocks: Block[] }) {
         }
 
         if (b.type === "video") {
-          return <AutoAspectVideo key={i} src={b.src} poster={b.poster} label={b.label} />;
+          return (
+            <AutoAspectVideo
+              key={i}
+              src={b.src}
+              poster={b.poster}
+              label={b.label}
+              autoplay={b.autoplay}
+              muted={b.muted}
+              loop={b.loop}
+              playsInline={b.playsInline}
+              controls={b.controls}
+            />
+          );
         }
 
         return null;

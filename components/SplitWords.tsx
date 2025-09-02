@@ -1,5 +1,5 @@
 'use client'
-import { motion } from 'framer-motion'
+import { motion, type Variants, type Easing } from 'framer-motion'
 import { useEffect, useMemo, useState } from 'react'
 
 type SplitWordsProps = {
@@ -17,6 +17,8 @@ type SplitWordsProps = {
   blur?: number
   /** animate when scrolled into view (true) or on mount (false) */
   inView?: boolean
+  /** easing for per-word transition */
+  ease?: Easing | 'linear' | 'easeIn' | 'easeOut' | 'easeInOut' | [number, number, number, number]
 }
 
 /**
@@ -32,6 +34,7 @@ export default function SplitWords({
   y = 14,
   blur = 0,
   inView = false,
+  ease = 'easeOut',
 }: SplitWordsProps) {
   // Split into tokens, keeping spaces and newlines as separate parts
   const parts = useMemo(() => {
@@ -40,7 +43,7 @@ export default function SplitWords({
   }, [text])
 
   // Motion variants
-  const container = {
+  const container: Variants = {
     hidden: { opacity: 1 }, // keep layout height stable
     show: {
       opacity: 1,
@@ -48,9 +51,9 @@ export default function SplitWords({
     },
   }
 
-  const child = {
+  const child: Variants = {
     hidden: { opacity: 0, y, filter: `blur(${blur}px)` },
-    show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration, ease: 'easeOut' } },
+    show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration, ease: ease as Easing } },
   }
 
   // Reduced motion support

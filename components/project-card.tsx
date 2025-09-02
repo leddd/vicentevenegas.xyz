@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 
 type Props = {
   href: string
@@ -13,15 +13,15 @@ type Props = {
 }
 
 export default function ProjectCard({ href, title, summary, image, alt, priority }: Props) {
-  const variants = {
+  const variants: Variants = {
     hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { duration: 1, ease: 'easeOut' } },
+    show: { opacity: 1, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } },
   }
   return (
     <motion.article
       style={{ backgroundColor: '#111111', borderColor: '#2A2A2A' }}
       whileHover={{ backgroundColor: '#252525ff', borderColor: '#3A3A3A' }}
-      transition={{ duration: 0.2, ease: 'easeOut' }}
+      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
       className="rounded-2xl border overflow-hidden"
       variants={variants}
     >

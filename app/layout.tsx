@@ -12,9 +12,22 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["400", "500", "600", "700"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://vicentevenegas.xyz";
+
 export const metadata: Metadata = {
-  title: "Vicente Venegas – Portfolio",
-  description: "UX/UI and Product Designer Portfolio",
+  metadataBase: new URL(siteUrl),
+  title: "Vicente Venegas",
+  description:
+    "UX/UI designer creating products that unite research, interfaces, and technology.",
+  openGraph: {
+    url: siteUrl,
+    siteName: "Vicente Venegas",
+    images: ["/og.jpg"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og.jpg"],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
