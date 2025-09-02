@@ -1,6 +1,7 @@
 // components/projects-grid.tsx
 'use client'
 import { useEffect, useRef } from 'react';
+import type { CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 import ProjectCard from '@/components/project-card';
 import { projects } from '@/lib/projects';
@@ -43,12 +44,14 @@ export default function ProjectsGrid() {
   const container = { hidden: {}, show: { transition: { delayChildren: 0.3 } } };
   const column = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
 
+  const sectionStyle: CSSProperties & { ['--card-h']: string } = { ['--card-h']: '0px' };
+
   return (
     <motion.section
       ref={sectionRef}
       id="projects"
       className="container grid-6 pb-24 gap-6"
-      style={{ ['--card-h' as any]: '0px' }}
+      style={sectionStyle}
       variants={container}
       initial="hidden"
       animate="show"
