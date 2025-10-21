@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 import { PageTransition } from "./page-transition";
 import Nav from "@/components/nav";
 import Brand from "@/components/brand";
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {/* Footer sticks to bottom */}
           <Footer />
         </div>
+        <Analytics />
       </body>
     </html>
   );
