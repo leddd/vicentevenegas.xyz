@@ -242,6 +242,11 @@ export const projects: Project[] = [
             src: "/images/projects/wirun/01-gameplay-video.mp4",
             poster: "/images/projects/wirun/01-gameplay-video-poster.jpg",
             label: "Gameplay loop in a kelp forest area",
+            autoplay: true,
+            muted: true,
+            loop: true,
+            playsInline: true,
+            // controls off by default
         },
 
         // Background / ECIM collaboration
@@ -307,19 +312,129 @@ export const projects: Project[] = [
 
   },
 
-/*
   {
     slug: "cabron",
     title: "Cabrón",
     summary:
-      "Bold charcoal brand with a punchy logo and cohesive, shelf-ready packaging.",
-    cover: "/images/projects/cabron/cover.png",
-    alt: "Cabrón charcoal packaging and logotype compositions.",
+      "Charcoal brand concept with a clear, high-contrast presence and a compact identity system.",
+    cover: "/images/projects/cabron/BAG.png",
+    alt: "Cabrón charcoal bag photographed on a dark background.",
     date: "2024-11",
     tags: ["Branding", "Identity", "Packaging"],
-    // blocks: [...]
-  },
-*/
+    blocks: [
+      {
+        type: "text",
+        heading: "What it is",
+        body:
+          "Personal branding/packaging concept for a Chilean charcoal line. Scope: naming, customized wordmark, horn mark, color/type system, information hierarchy, and photo direction. Brand direction: bold, slightly irreverent, grounded in the essentials of fire and material.",
+      },
+
+      // Wordmark + mark (two-up)
+
+      {
+        type: "text",
+        heading: "Identity",
+        body:
+          "Wordmark based on Hudson NY and customized for a denser rhythm with flat cuts that echo charcoal facets. The horn mark reads first as attitude and also as an ignition gesture; the pair balances recognition and utility at small sizes.",
+      },
+      {
+        type: "twoUp",
+        images: [
+          {
+            src: "/images/projects/cabron/WORDMARK.png",
+            alt: "Cabrón wordmark (modified Hudson NY) on black",
+          },
+          {
+            src: "/images/projects/cabron/MARK.png",
+            alt: "Cabrón horn mark used as a compact ignition cue",
+          },
+        ],
+      },
+
+
+
+      // Color & type (two-up)
+      {
+        type: "text",
+        heading: "Color & type",
+        body:
+          "Palette: black base, red as primary, white as accent. Typography: Oswald for auxiliary/body copy; the customized Hudson NY wordmark for display and primary branding moments.",
+      },
+      {
+        type: "twoUp",
+        images: [
+          {
+            src: "/images/projects/cabron/COLOR.png",
+            alt: "Type specimen and claims layout",
+          },
+          {
+            src: "/images/projects/cabron/TYPE.png",
+            alt: "Palette and scale specimen (alternate crop)",
+          },
+        ],
+      },
+
+      // Bag — full width
+      {
+        type: "text",
+        heading: "Packaging hero",
+        body:
+          "Front panel organized for quick read: brand first, weight second, then a concise promise. Minimal elements keep the shelf read clean.",
+      },
+      {
+        type: "image",
+        image: {
+          src: "/images/projects/cabron/BAG.png",
+          alt: "Front view of the Cabrón bag with high-contrast layout",
+        },
+      },
+
+
+
+      // Matchbooks — full width
+      {
+        type: "text",
+        heading: "Brand extensions",
+        body:
+          "Matchbooks test the identity at small scale. Short, direct copy keeps the tone consistent.",
+      },
+      {
+        type: "image",
+        image: {
+          src: "/images/projects/cabron/MATCH.png",
+          alt: "Cabrón branded matchbooks with horn mark",
+        },
+      },
+
+      {
+        type: "image",
+        image: {
+          src: "/images/projects/cabron/CLOSEUP.png",
+          alt: "Label closeup showing texture and material details",
+        },
+      },
+
+
+
+      // Texture — closing frame (full width)
+
+
+      {
+        type: "text",
+        heading: "Outcome",
+        body:
+          "Naming, modified wordmark, symbol, color/type guidelines, and a packaging hierarchy explored through hero, macro, and accessory shots. Concept-stage work aimed at clarity, cohesion, and scalability.",
+      },
+      {
+        type: "image",
+        image: {
+          src: "/images/projects/cabron/TEXTURE.png",
+          alt: "Cabrón mark over a charcoal texture background",
+        },
+      },
+    ],
+  }
+  , 
   {
     slug: "blitz",
     title: "Blitz",
@@ -412,77 +527,324 @@ export const projects: Project[] = [
 
   },
 
-{
-    slug: "loop-bench",
-    title: "Loop Bench",
-    summary:
-      "Two-seat CNC-cut plywood bench; zip-tie joinery for a fast, light build.",
-    cover: "/images/projects/loop-bench/cover.png",
-    alt: "Two-seat plywood bench assembled with zip ties.",
-    date: "2024-11",
-    tags: ["Industrial Design", "Prototyping", "CAD/CAM"],
-    // blocks: [...]
-    blocks: [
+  {
+      slug: "studio-hot-hand",
+      title: "Studio Hot Hand",
+      summary:
+        "A boutique design studio I co-founded in 2025 with Javiera Melo. Creative direction, illustration, branding, motion, and 3D — a selection of commissioned and original projects.",
+      cover: "/images/projects/studio-hot-hand/COVER.png",
+      alt: "Studio Hot Hand flyer on hot pink paper with bold black type.",
+      date: "2025-01",
+      tags: ["Creative Direction", "Branding", "Illustration", "Editorial", "Motion", "3D"],
+      blocks: [
         {
           type: "text",
           heading: "What it is",
           body:
-            "A two-person bench cut from 3 mm plywood and stitched together with zip ties. The flowing profile uses curvature and tension for strength while keeping the build lightweight and tool-free.",
+            "In 2025 I co-founded Studio Hot Hand with Javiera Melo, a boutique design studio where we provide creative services and produce original work. From editorial and graphic design to animation, 3D, illustration, and creative direction — these are selected projects.",
         },
 
+        // Brand & worldbuilding
+        {
+          type: "image",
+          image: {
+            src: "/images/projects/studio-hot-hand/FLYER.jpg",
+            alt: "Hot Hand promotional flyer with bold type and satisfaction guarantee tagline.",
+          },
+        },
         {
           type: "text",
-          heading: "Build approach",
+          heading: "Brand & worldbuilding",
           body:
-            "Panels are CNC-routed with slotted tabs that accept standard zip ties. The geometry locks under tension, so assembly is quick, reversible, and easy to repair. Parts nest efficiently on sheets to minimize waste.",
+            "The flyer and hand illustration are part of our own visual world — bold, direct, and slightly self-aware. Hot Hand blends humor, tactile design, and clear communication into a visual language that feels alive both online and in print.",
         },
 
-        // CAD + assembly manual
+        // Typographic hand (two-up)
         {
           type: "twoUp",
           images: [
             {
-              src: "/images/projects/loop-bench/02-cad-views.png",
-              alt: "CAD renders: perspective, front elevation, and plan view of the bench.",
+              src: "/images/projects/studio-hot-hand/HAND1.jpg",
+              alt: "Typographic hand illustration built from repeating HOT/HAND letterforms.",
             },
             {
-              src: "/images/projects/loop-bench/03-assembly-manual.png",
-              alt: "Assembly booklet with part callouts and zip-tie count.",
+              src: "/images/projects/studio-hot-hand/HAND2.jpg",
+              alt: "Process overlay showing construction of the typographic hand.",
             },
           ],
         },
-
         {
           type: "text",
-          heading: "Assembly & use",
+          heading: "Micro Amarilla",
           body:
-            "Flat parts + ~200 zip ties. Slot, lace, and cinch—no clamps or hardware required. The form’s waist adds stiffness and a natural hand-hold for moving the piece.",
+            "A risograph print made for Día del Patrimonio, illustrating the front of Santiago’s classic micros amarillas. Focused on texture, signage, and the layered graphics that define everyday city identity.",
+        },
+        // Micro Amarilla
+        {
+          type: "image",
+          image: {
+            src: "/images/projects/studio-hot-hand/MICRO.png",
+            alt: "Risograph print of classic Santiago micro bus front.",
+          },
         },
 
-        // Companion lamp
+
+        // Rocket Man (two-up)
+        {
+          type: "text",
+          heading: "Rocket Man",
+          body:
+            "Posters for Laurel Bath House’s fragrance Rocket Man. Illustration and creative direction merge ’70s retro-futurism with pulp print style — halftones, bold linework, and worn paper textures.",
+        },
         {
           type: "twoUp",
           images: [
             {
-              src: "/images/projects/loop-bench/04-lamp-prototype.jpg",
-              alt: "Desk lamp prototype with laminated wood, acrylic ring, and LEDs.",
+              src: "/images/projects/studio-hot-hand/ROCKETMAN1.png",
+              alt: "Retro comic key art for Rocket Man fragrance concept.",
             },
             {
-              src: "/images/projects/loop-bench/05-lamp-detail.jpg",
-              alt: "Detail of acrylic ring projecting soft light and curves echoing the bench.",
+              src: "/images/projects/studio-hot-hand/ROCKETMAN2.png",
+              alt: "Campaign frame showing perfume bottle in astronaut cockpit.",
             },
           ],
         },
 
+
+        // Severance
         {
           type: "text",
-          heading: "Companion piece",
+          heading: "Severance",
           body:
-            "A small desk lamp explores the same language—three materials layered to cast shifting light through a rotating aluminum ring. It echoes the bench’s curves and stitched construction.",
+            "A poster inspired by vintage plastic model kits — the kind you assemble piece by piece. Focus on illustration and texture details, built around the theme of construction and control.",
         },
+        {
+          type: "image",
+          image: {
+            src: "/images/projects/studio-hot-hand/SEVERANCE.png",
+            alt: "Poster inspired by vintage model kit packaging with computer illustration.",
+          },
+        },
+        {
+          type: "twoUp",
+          images: [
+            {
+              src: "/images/projects/studio-hot-hand/SEVERANCE1.png",
+              alt: "Closeup severance poster detail showing texture and linework.",
+            },
+            {
+              src: "/images/projects/studio-hot-hand/SEVERANCE2.png",
+              alt: "Closeup severance poster detail showing texture and linework.",
+            },
+          ],
+        },
+
+
+        // 3D Room — video loop
+        {
+          type: "text",
+          heading: "3D Room",
+          body:
+            "A 3D animated room that shifts from day to night. Built to capture personality through scale and detail — textures, light, and atmosphere define its tone more than movement itself.",
+        },
+        {
+          type: "video",
+          src: "/images/projects/studio-hot-hand/ROOMVID.mp4",
+          poster: "/images/projects/studio-hot-hand/final_0002_Layer-1.png",
+          label: "Day ↔ Night loop",
+          autoplay: true,
+          muted: true,
+          loop: true,
+          playsInline: true,
+        },
+        {
+          type: "twoUp",
+          images: [
+            {
+              src: "/images/projects/studio-hot-hand/ROOM1.png",
+              alt: "Closeup room detail showing texture and linework.",
+            },
+            {
+              src: "/images/projects/studio-hot-hand/ROOM2.png",
+              alt: "Closeup room detail showing texture and linework.",
+            },
+          ],
+        },
+
+
+
+        // Outcome
+        {
+          type: "text",
+          heading: "Outcome",
+          body:
+            "Studio Hot Hand mixes commissioned and self-initiated work — balancing clear, functional design with playful experimentation across media. These projects show the mix of worlds we like to build: tactile, direct, and slightly surreal.",
+        },
+      ],
+  }
+    ,
+
+  {
+    slug: "la-piel-tejida",
+    title: "La Piel Tejida",
+    summary:
+      "An interactive textile installation that transforms touch into audiovisual expression. I worked on bridging the physical and digital layers — programming the interactive logic, developing the sound design, and shaping how the piece responds to touch.",
+    cover: "/images/projects/la-piel-tejida/COVER.png",
+    alt: "Interactive textile installation showing woven surface with embedded electronics.",
+    date: "2025-7",
+    tags: ["Interactive Installation", "Sound Design", "Physical Computing", "Art & Technology"],
+    blocks: [
+      {
+        type: "text",
+        heading: "Overview",
+        body:
+          "La Piel Tejida is an interactive textile installation that transforms touch into audiovisual expression. I worked on bridging the physical and digital layers — programming the interactive logic, developing the sound design, and shaping how the piece responds to touch.",
+      },
+
+      {
+        type: "text",
+        heading: "Concept",
+        body:
+          "La Piel Tejida operates through a set of internal rules combined with external interaction. Its structure is defined by conductive zones that respond to contact, each with pre-defined behavioral parameters. Although the system follows a logical framework, it remains open — every touch alters its state in real time and reveals new sound or visual responses. Over time, this dynamic could evolve into a system that learns from interaction patterns.",
+      },
+
+      {
+        type: "twoUp",
+        images: [
+          {
+            src: "/images/projects/la-piel-tejida/CLOSEUP1.png",
+            alt: "Close-up of conductive woven textile showing material transitions.",
+          },
+          {
+            src: "/images/projects/la-piel-tejida/CLOSEUP2.png",
+            alt: "Process image showing integration of sensors within textile structure.",
+          },
+        ],
+      },
+      {
+        type: "text",
+        heading: "Process",
+        body:
+          "Early explorations focused on conductive weaving and material mapping. Each woven section contained unique response parameters linked to sensors and microcontrollers, allowing the textile to function as both interface and medium.",
+      },
+
+      {
+        type: "gallery",
+        images: [
+          {
+            src: "/images/projects/la-piel-tejida/WhatsApp Image 2025-09-22 at 6.11.27 PM.png",
+            alt: "Group of visitors interacting with the La Piel Tejida installation.",
+          },
+          {
+            src: "/images/projects/la-piel-tejida/WhatsApp Image 2025-10-14 at 9.38.02 AM.png",
+            alt: "Full view of installation setup with screens and woven textile.",
+          },
+          {
+            src: "/images/projects/la-piel-tejida/photo1.jpg",
+            alt: "Detail view of woven surface showing threads and color transitions.",
+          },
+          {
+            src: "/images/projects/la-piel-tejida/photo2.jpg",
+            alt: "Side view of installation structure with lighting and display setup.",
+          },
+        ],
+      },
+      {
+        type: "text",
+        heading: "Installation",
+        body:
+          "Exhibited as a tactile surface on a custom wooden frame, the piece integrates embedded circuitry and dual display feedback. Visitors activated sounds and visuals through direct contact, making each interaction distinct and unpredictable.",
+      },
+      
+      {
+        type: "image",
+        image: {
+          src: "/images/projects/la-piel-tejida/EXHIBITION.png",
+          alt: "People at the exhibition.",
+        },
+      },
+
+      {
+        type: "text",
+        heading: "Outcome",
+        body:
+          "La Piel Tejida explores the intersection between craft and computation — how a woven surface can become both interface and performer. By combining physical weaving with algorithmic behavior, the piece invites a dialogue between structure, touch, and sound.",
+      },
     ],
-    
   },
+
+
+  {
+      slug: "loop-bench",
+      title: "Loop Bench",
+      summary:
+        "Two-seat CNC-cut plywood bench; zip-tie joinery for a fast, light build.",
+      cover: "/images/projects/loop-bench/cover.png",
+      alt: "Two-seat plywood bench assembled with zip ties.",
+      date: "2024-11",
+      tags: ["Industrial Design", "Prototyping", "CAD/CAM"],
+      // blocks: [...]
+      blocks: [
+          {
+            type: "text",
+            heading: "What it is",
+            body:
+              "A two-person bench cut from 3 mm plywood and stitched together with zip ties. The flowing profile uses curvature and tension for strength while keeping the build lightweight and tool-free.",
+          },
+
+          {
+            type: "text",
+            heading: "Build approach",
+            body:
+              "Panels are CNC-routed with slotted tabs that accept standard zip ties. The geometry locks under tension, so assembly is quick, reversible, and easy to repair. Parts nest efficiently on sheets to minimize waste.",
+          },
+
+          // CAD + assembly manual
+          {
+            type: "twoUp",
+            images: [
+              {
+                src: "/images/projects/loop-bench/02-cad-views.png",
+                alt: "CAD renders: perspective, front elevation, and plan view of the bench.",
+              },
+              {
+                src: "/images/projects/loop-bench/03-assembly-manual.png",
+                alt: "Assembly booklet with part callouts and zip-tie count.",
+              },
+            ],
+          },
+
+          {
+            type: "text",
+            heading: "Assembly & use",
+            body:
+              "Flat parts + ~200 zip ties. Slot, lace, and cinch—no clamps or hardware required. The form’s waist adds stiffness and a natural hand-hold for moving the piece.",
+          },
+
+          // Companion lamp
+          {
+            type: "twoUp",
+            images: [
+              {
+                src: "/images/projects/loop-bench/04-lamp-prototype.jpg",
+                alt: "Desk lamp prototype with laminated wood, acrylic ring, and LEDs.",
+              },
+              {
+                src: "/images/projects/loop-bench/05-lamp-detail.jpg",
+                alt: "Detail of acrylic ring projecting soft light and curves echoing the bench.",
+              },
+            ],
+          },
+
+          {
+            type: "text",
+            heading: "Companion piece",
+            body:
+              "A small desk lamp explores the same language—three materials layered to cast shifting light through a rotating aluminum ring. It echoes the bench’s curves and stitched construction.",
+          },
+      ],
+      
+    },
 ];
 
 export function getProject(slug: string) {
