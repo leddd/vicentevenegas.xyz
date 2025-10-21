@@ -728,27 +728,7 @@ export const projects: Project[] = [
           "Early explorations focused on conductive weaving and material mapping. Each woven section contained unique response parameters linked to sensors and microcontrollers, allowing the textile to function as both interface and medium.",
       },
 
-      {
-        type: "gallery",
-        images: [
-          {
-            src: "/images/projects/la-piel-tejida/WhatsApp Image 2025-09-22 at 6.11.27 PM.png",
-            alt: "Group of visitors interacting with the La Piel Tejida installation.",
-          },
-          {
-            src: "/images/projects/la-piel-tejida/WhatsApp Image 2025-10-14 at 9.38.02 AM.png",
-            alt: "Full view of installation setup with screens and woven textile.",
-          },
-          {
-            src: "/images/projects/la-piel-tejida/photo1.jpg",
-            alt: "Detail view of woven surface showing threads and color transitions.",
-          },
-          {
-            src: "/images/projects/la-piel-tejida/photo2.jpg",
-            alt: "Side view of installation structure with lighting and display setup.",
-          },
-        ],
-      },
+
       {
         type: "text",
         heading: "Installation",
