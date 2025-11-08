@@ -4,25 +4,62 @@ import type { Block } from "@/components/project-blocks";
 export type Project = {
   slug: string;
   title: string;
-  summary: string;
+  tags: string;
   cover: string;   // path under /public
+  cardImage?: string; // optional grid/card image
   alt: string;
   date?: string;   // "YYYY-MM"
-  tags?: string[];
   draft?: boolean;
   blocks?: Block[]; // 👈 flexible page content
 };
+
+const parseDate = (value?: string) => {
+  if (!value) return 0;
+  const [year, month = "01"] = value.split("-");
+  return Number(new Date(Number(year), Number(month) - 1, 1));
+};
+
+export function getRelatedProjects(currentSlug: string, count = 3) {
+  const ordered = [...projects]
+    .filter((p) => !p.draft)
+    .sort((a, b) => parseDate(b.date) - parseDate(a.date));
+
+  const currentIndex = ordered.findIndex((p) => p.slug === currentSlug);
+  if (currentIndex === -1) return ordered.slice(0, count);
+
+  const nextNewer = ordered[currentIndex - 1];
+  const older = ordered.slice(currentIndex + 1);
+
+  if (!nextNewer) {
+    const remaining = count - older.length;
+    if (remaining <= 0) return older.slice(0, count);
+    const fallbackNewer = ordered.slice(0, currentIndex).slice(0, remaining);
+    return [...older, ...fallbackNewer].slice(0, count);
+  }
+
+  const related: Project[] = [nextNewer];
+  const desiredOlder = older.slice(0, count - 1);
+  related.push(...desiredOlder);
+
+  if (related.length < count) {
+    const remaining = count - related.length;
+    const fallbackNewer = ordered.slice(0, currentIndex - 1).slice(0, remaining);
+    related.push(...fallbackNewer);
+  }
+
+  return related.slice(0, count);
+}
 
 export const projects: Project[] = [
   {
     slug: "djavu",
     title: "Djavu",
-    summary:
-      "A DIY kit that demystifies audio as users assemble and experiment with a simple, low-cost recording device.",
+
     cover: "/images/projects/djavu/cover.png",
     alt: "Djavu DIY audio kit assembled with knobs and pads on a table.",
     date: "2024-11",
-    tags: ["Product Design", "Interaction", "CAD/CAM", "STEAM", "Audio"],
+    tags: "Product Design, Interaction, CAD/CAM",
+
     blocks: [
       // Big assembled unit (optional hero follow-up)
 
@@ -33,7 +70,9 @@ export const projects: Project[] = [
         body:
           "Djavu is a hands-on recording kit for learning and experimenting with sound. Designed primarily for students, but equally useful for musicians and teachers, it makes audio tangible—no DAW required.",
       },
-
+      {
+        type: "spacer",
+      },
       // How it was shaped
       {
         type: "text",
@@ -66,7 +105,9 @@ export const projects: Project[] = [
         body:
           "Six loop slots to record, overdub, mute/unmute, and clear; microphone input for quick capture; setup for tempo (BPM) and time signature with optional quantization; simple transport (arm, record, play/stop); concise OLED feedback for slot states and levels.",
       },
-
+      {
+        type: "spacer",
+      },
       // Text + image (image right): field test
       {
         type: "textImage",
@@ -80,7 +121,9 @@ export const projects: Project[] = [
           w: 1024, h: 768,
         },
       },
-
+      {
+        type: "spacer",
+      },
       // Internals photo
       {
         type: "image",
@@ -98,7 +141,9 @@ export const projects: Project[] = [
         body:
           "This prototype runs on a Raspberry Pi with a small OLED, 3D-printed controls, and a rotary/press encoder. The planned final version migrates to a Pi Zero or a smaller microcontroller with a custom PCB for durability, lower cost, and simpler assembly.",
       },
-
+      {
+        type: "spacer",
+      },
       // Why it's useful
       {
         type: "text",
@@ -112,12 +157,12 @@ export const projects: Project[] = [
   {
     slug: "carvuk",
     title: "Carvuk",
-    summary:
-      "User journeys and insights shaping a clearer, confidence-building Carvuk app.",
+
     cover: "/images/projects/carvuk/cover.png",
     alt: "Carvuk app interface mockups and research artifacts.",
     date: "2024-11",
-    tags: ["UX Research", "Service Design", "Interface"],
+    tags: "UX Research, Service Design",
+
     // blocks: [...]  // add when ready
     blocks: [
         {
@@ -128,7 +173,9 @@ export const projects: Project[] = [
         },
 
         // 01 — hero (unused)
-
+        {
+          type: "spacer",
+        },
         {
             type: "text",
             heading: "Research approach",
@@ -150,7 +197,9 @@ export const projects: Project[] = [
             },
             ],
         },
-
+        {
+          type: "spacer",
+        },
         {
             type: "text",
             heading: "Key insights",
@@ -181,7 +230,9 @@ export const projects: Project[] = [
             alt: "Strategy pillars: mentor not assistant, contagious trust, open window on processes, spread the benefit",
             },
         },
-
+        {
+          type: "spacer",
+        },
         {
             type: "text",
             heading: "Design directions",
@@ -206,7 +257,9 @@ export const projects: Project[] = [
             alt: "Live status with map, service chat, and task details",
             },
         },
-
+        {
+          type: "spacer",
+        },
         {
             type: "text",
             heading: "Outcome",
@@ -220,12 +273,12 @@ export const projects: Project[] = [
   {
     slug: "wirun",
     title: "Wirun",
-    summary:
-      "A platformer that teaches macroalgae ecology through exploration and tangential learning.",
+
     cover: "/images/projects/wirun/cover.png",
     alt: "Wirun platformer screens with macroalgae environments.",
-    date: "2024-11",
-    tags: ["Game", "Education", "Animation", "Science Communication"],
+    date: "2023-10",
+    tags: "Videogame, Education, Animation",
+
     // blocks: [...]
     blocks: [
         // What it is
@@ -248,7 +301,9 @@ export const projects: Project[] = [
             playsInline: true,
             // controls off by default
         },
-
+        {
+          type: "spacer",
+        },
         // Background / ECIM collaboration
         {
             type: "text",
@@ -265,7 +320,9 @@ export const projects: Project[] = [
             { src: "/images/projects/wirun/03-ecim-classroom-workshop.png", alt: "Workshop session with students at ECIM",  w: 1024, h: 768 },
             ],
         },
-
+        {
+          type: "spacer",
+        },
         // How it teaches
         {
             type: "text",
@@ -283,7 +340,9 @@ export const projects: Project[] = [
             w: 1200, h: 675,
             },
         },
-
+        {
+          type: "spacer",
+        },
         // Mechanics (concise)
         {
             type: "text",
@@ -300,7 +359,9 @@ export const projects: Project[] = [
             { src: "/images/projects/wirun/06-wordmark-sprout.png",   alt: "Wirun wordmark with sprout accent",             w: 1200, h: 768 },
             ],
         },
-
+        {
+          type: "spacer",
+        },
         // Status and roadmap
         {
             type: "text",
@@ -315,12 +376,12 @@ export const projects: Project[] = [
   {
     slug: "cabron",
     title: "Cabrón",
-    summary:
-      "Charcoal brand concept with a clear, high-contrast presence and a compact identity system.",
+
     cover: "/images/projects/cabron/BAG.png",
     alt: "Cabrón charcoal bag photographed on a dark background.",
-    date: "2024-11",
-    tags: ["Branding", "Identity", "Packaging"],
+    date: "2023-5",
+    tags: "Branding, Identity, Packaging",
+
     blocks: [
       {
         type: "text",
@@ -330,6 +391,10 @@ export const projects: Project[] = [
       },
 
       // Wordmark + mark (two-up)
+
+      {
+        type: "spacer",
+      },
 
       {
         type: "text",
@@ -351,7 +416,9 @@ export const projects: Project[] = [
         ],
       },
 
-
+      {
+        type: "spacer",
+      },
 
       // Color & type (two-up)
       {
@@ -374,6 +441,10 @@ export const projects: Project[] = [
         ],
       },
 
+      {
+        type: "spacer",
+      },
+
       // Bag — full width
       {
         type: "text",
@@ -389,7 +460,9 @@ export const projects: Project[] = [
         },
       },
 
-
+      {
+        type: "spacer",
+      },
 
       // Matchbooks — full width
       {
@@ -414,7 +487,9 @@ export const projects: Project[] = [
         },
       },
 
-
+      {
+        type: "spacer",
+      },
 
       // Texture — closing frame (full width)
 
@@ -438,12 +513,12 @@ export const projects: Project[] = [
   {
     slug: "blitz",
     title: "Blitz",
-    summary:
-    "Playful snack brand for casual chess—chunky logotype, warm palette, and an unfoldable triangular pack concept.",
+
     cover: "/images/projects/blitz/cover.png",
     alt: "Blitz triangular box with crowned logotype and checker accents.",
-    date: "2024-11",
-    tags: ["Branding", "Identity", "Packaging", "Motion"],
+    date: "2022-11",
+    tags: "Branding, Identity, Packaging",
+
     // blocks: [...]
     blocks: [
         {
@@ -467,7 +542,9 @@ export const projects: Project[] = [
             },
             ],
         },
-
+        {
+          type: "spacer",
+        },
         {
             type: "text",
             heading: "Identity system",
@@ -500,7 +577,9 @@ export const projects: Project[] = [
             ],
         },
 
-
+        {
+          type: "spacer",
+        },
 
         {
             type: "text",
@@ -516,7 +595,9 @@ export const projects: Project[] = [
             alt: "Pack unfolded into a checkerboard surface for casual play",
             },
         },
-
+        {
+          type: "spacer",
+        },
         {
             type: "text",
             heading: "Outcome",
@@ -530,12 +611,12 @@ export const projects: Project[] = [
   {
       slug: "studio-hot-hand",
       title: "Studio Hot Hand",
-      summary:
-        "A boutique design studio I co-founded in 2025 with Javiera Melo. Creative direction, illustration, branding, motion, and 3D — a selection of commissioned and original projects.",
+
       cover: "/images/projects/studio-hot-hand/COVER.png",
       alt: "Studio Hot Hand flyer on hot pink paper with bold black type.",
       date: "2025-01",
-      tags: ["Creative Direction", "Branding", "Illustration", "Editorial", "Motion", "3D"],
+      tags: "Creative Direction, Graphic Design, Illustration",
+
       blocks: [
         {
           type: "text",
@@ -552,6 +633,11 @@ export const projects: Project[] = [
             alt: "Hot Hand promotional flyer with bold type and satisfaction guarantee tagline.",
           },
         },
+
+        {
+          type: "spacer",
+        },
+
         {
           type: "text",
           heading: "Brand & worldbuilding",
@@ -573,6 +659,10 @@ export const projects: Project[] = [
             },
           ],
         },
+
+        {
+          type: "spacer",
+        },
         {
           type: "text",
           heading: "Micro Amarilla",
@@ -588,7 +678,9 @@ export const projects: Project[] = [
           },
         },
 
-
+        {
+          type: "spacer",
+        },
         // Rocket Man (two-up)
         {
           type: "text",
@@ -609,7 +701,9 @@ export const projects: Project[] = [
             },
           ],
         },
-
+        {
+          type: "spacer",
+        },
 
         // Severance
         {
@@ -638,12 +732,14 @@ export const projects: Project[] = [
             },
           ],
         },
-
+        {
+          type: "spacer",
+        },
 
         // 3D Room — video loop
         {
           type: "text",
-          heading: "3D Room",
+          heading: "Isometric interior",
           body:
             "A 3D animated room that shifts from day to night. Built to capture personality through scale and detail — textures, light, and atmosphere define its tone more than movement itself.",
         },
@@ -671,7 +767,9 @@ export const projects: Project[] = [
           ],
         },
 
-
+        {
+          type: "spacer",
+        },
 
         // Outcome
         {
@@ -687,12 +785,12 @@ export const projects: Project[] = [
   {
     slug: "la-piel-tejida",
     title: "La Piel Tejida",
-    summary:
-      "An interactive textile installation that transforms touch into audiovisual expression. I worked on bridging the physical and digital layers — programming the interactive logic, developing the sound design, and shaping how the piece responds to touch.",
+
     cover: "/images/projects/la-piel-tejida/COVER.png",
     alt: "Interactive textile installation showing woven surface with embedded electronics.",
     date: "2025-7",
-    tags: ["Interactive Installation", "Sound Design", "Physical Computing", "Art & Technology"],
+    tags: "Art & Technology, Sound Design, Programming",
+
     blocks: [
       {
         type: "text",
@@ -700,7 +798,9 @@ export const projects: Project[] = [
         body:
           "La Piel Tejida is an interactive textile installation that transforms touch into audiovisual expression. I worked on bridging the physical and digital layers — programming the interactive logic, developing the sound design, and shaping how the piece responds to touch.",
       },
-
+      {
+        type: "spacer",
+      },
       {
         type: "text",
         heading: "Concept",
@@ -722,13 +822,18 @@ export const projects: Project[] = [
         ],
       },
       {
+        type: "spacer",
+      },
+      {
         type: "text",
         heading: "Process",
         body:
           "Early explorations focused on conductive weaving and material mapping. Each woven section contained unique response parameters linked to sensors and microcontrollers, allowing the textile to function as both interface and medium.",
       },
 
-
+      {
+        type: "spacer",
+      },
       {
         type: "text",
         heading: "Installation",
@@ -743,7 +848,9 @@ export const projects: Project[] = [
           alt: "People at the exhibition.",
         },
       },
-
+      {
+        type: "spacer",
+      },
       {
         type: "text",
         heading: "Outcome",
@@ -757,12 +864,12 @@ export const projects: Project[] = [
   {
       slug: "loop-bench",
       title: "Loop Bench",
-      summary:
-        "Two-seat CNC-cut plywood bench; zip-tie joinery for a fast, light build.",
+
       cover: "/images/projects/loop-bench/cover.png",
       alt: "Two-seat plywood bench assembled with zip ties.",
-      date: "2024-11",
-      tags: ["Industrial Design", "Prototyping", "CAD/CAM"],
+      date: "2022-3",
+      tags: "Industrial Design, Prototyping, CAD/CAM",
+
       // blocks: [...]
       blocks: [
           {
@@ -771,14 +878,21 @@ export const projects: Project[] = [
             body:
               "A two-person bench cut from 3 mm plywood and stitched together with zip ties. The flowing profile uses curvature and tension for strength while keeping the build lightweight and tool-free.",
           },
-
+          {
+            type: "spacer",
+          },
           {
             type: "text",
             heading: "Build approach",
             body:
               "Panels are CNC-routed with slotted tabs that accept standard zip ties. The geometry locks under tension, so assembly is quick, reversible, and easy to repair. Parts nest efficiently on sheets to minimize waste.",
           },
-
+          {
+            type: "text",
+            heading: "Assembly & use",
+            body:
+              "Flat parts + ~200 zip ties. Slot, lace, and cinch—no clamps or hardware required. The form’s waist adds stiffness and a natural hand-hold for moving the piece.",
+          },
           // CAD + assembly manual
           {
             type: "twoUp",
@@ -794,14 +908,17 @@ export const projects: Project[] = [
             ],
           },
 
+
+          {
+            type: "spacer",
+          },
+          // Companion lamp
           {
             type: "text",
-            heading: "Assembly & use",
+            heading: "Companion piece",
             body:
-              "Flat parts + ~200 zip ties. Slot, lace, and cinch—no clamps or hardware required. The form’s waist adds stiffness and a natural hand-hold for moving the piece.",
+              "A small desk lamp explores the same language—three materials layered to cast shifting light through a rotating aluminum ring. It echoes the bench’s curves and stitched construction.",
           },
-
-          // Companion lamp
           {
             type: "twoUp",
             images: [
@@ -816,12 +933,7 @@ export const projects: Project[] = [
             ],
           },
 
-          {
-            type: "text",
-            heading: "Companion piece",
-            body:
-              "A small desk lamp explores the same language—three materials layered to cast shifting light through a rotating aluminum ring. It echoes the bench’s curves and stitched construction.",
-          },
+
       ],
       
     },

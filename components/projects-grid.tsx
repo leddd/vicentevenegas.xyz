@@ -49,7 +49,7 @@ export default function ProjectsGrid() {
   return (
     <motion.section
       ref={sectionRef}
-      id="projects"
+      id="work"
       className="container grid-6 pb-24 gap-6"
       style={sectionStyle}
       variants={container}
@@ -63,8 +63,8 @@ export default function ProjectsGrid() {
             <ProjectCard
               href={`/projects/${p.slug}`}
               title={p.title}
-              summary={p.summary}
-              image={p.cover}
+              tags={p.tags}
+              image={p.cardImage ?? p.cover}
               alt={p.alt}
               priority={i === 0} // only the very first gets priority
             />
@@ -83,8 +83,8 @@ export default function ProjectsGrid() {
             key={p.slug}
             href={`/projects/${p.slug}`}
             title={p.title}
-            summary={p.summary}
-            image={p.cover}
+            tags={p.tags}
+            image={p.cardImage ?? p.cover}
             alt={p.alt}
           />
         ))}

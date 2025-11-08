@@ -1,55 +1,96 @@
-// components/footer.tsx
+"use client";
+
+import { Mail, Linkedin, Github, Twitter, Instagram } from 'lucide-react';
+
 export default function Footer() {
-  const year = new Date().getFullYear();
-
-  const links = [
-    { href: "mailto:vicente.venegas@uc.cl", label: "Email", icon: "/icons/mail.svg" },
-    { href: "https://www.linkedin.com/in/vicentevenegas", label: "LinkedIn", icon: "/icons/linkedin.svg" },
-    { href: "https://github.com/leddd", label: "GitHub", icon: "/icons/github.svg" },
-    { href: "https://instagram.com/studiohothand", label: "Instagram", icon: "/icons/ig.svg" },
-  ];
-
   return (
-    <footer className="mt-auto">
-      <div className="container grid-6 items-center py-6">
-        {/* Left: copyright */}
-        <p className="col-span-6 lg:col-span-3 text-[16px] text-[white]/70">
-          © {year} Vicente Venegas
+    <section
+      id="contact"
+      className="min-h-screen snap-section bg-transparent flex flex-col justify-between px-6 md:px-12 lg:px-[220px] pt-24 md:pt-48 pb-12 md:pb-8 grid-overlay scroll-mt-[-220px]"
+    >
+      {/* Top Section */}
+      <div>
+        <h2 className="text-[#EDEDED] text-4xl md:text-5xl lg:text-7xl mb-6 label-glow-soft">
+          Let&rsquo;s Talk
+        </h2>
+        <p className="text-[#B3B3B3] text-base md:text-lg lg:text-l max-w-xl">
+          Interested in working together? Have a project in mind? Let&rsquo;s connect.
         </p>
-
-        {/* Right: social */}
-        <nav
-          aria-label="Social links"
-          className="col-span-6 lg:col-span-3 flex justify-start lg:justify-end"
-        >
-          <ul className="flex gap-4">
-            {links.map(({ href, label, icon }) => (
-              <li key={label}>
-                  <a
-                    href={href}
-                    target={href.startsWith("http") || href.startsWith("mailto:") ? "_blank" : undefined}
-                    rel={href.startsWith("http") || href.startsWith("mailto:") ? "noopener noreferrer" : undefined}
-                    className="group inline-flex h-10 w-8 items-center justify-center
-                               text-[white]/70 hover:text-white transition"
-                  >
-                  {/* Use the SVG as a mask so it follows text color */}
-                  <span
-                    aria-hidden="true"
-                    className="h-6 w-6"
-                    style={{
-                      WebkitMask: `url(${icon}) no-repeat center / contain`,
-                      mask: `url(${icon}) no-repeat center / contain`,
-                      backgroundColor: "currentColor",
-                      display: "inline-block",
-                    }}
-                  />
-                  <span className="sr-only">{label}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
       </div>
-    </footer>
+
+      {/* Middle Section - Contact Info */}
+      <div className="space-y-6">
+        <div>
+          <div
+            className="text-[#00CE93] text-xs md:text-sm mb-2 uppercase tracking-wider label-glow-soft"
+            style={{ fontFamily: 'Space Mono, monospace' }}
+          >
+            Email
+          </div>
+          <a
+            href="mailto:hello@vicentevenegas.com"
+            className="text-[#EDEDED] text-lg md:text-xl lg:text-xl hover:text-[#00CE93] hover:label-glow transition-all duration-200 break-all"
+          >
+            vicente.venegas@uc.cl
+          </a>
+        </div>
+        <div>
+          <div
+            className="text-[#00CE93] text-xs md:text-sm mb-2 uppercase tracking-wider label-glow-soft"
+            style={{ fontFamily: 'Space Mono, monospace' }}
+          >
+            Location
+          </div>
+          <div className="text-[#EDEDED] text-lg md:text-xl lg:text-l">
+            Santiago, CL
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Section - Social Links and Copyright */}
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 md:gap-0">
+        <div className="text-[#B3B3B3] text-xs md:text-sm" style={{ fontFamily: 'Space Mono, monospace' }}>
+          © 2025 Vicente Venegas. All rights reserved.
+        </div>
+        <div className="flex gap-6">
+          <a
+            href="mailto:vicente.venegas@uc.cl"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#B3B3B3] hover:text-[#00CE93] transition-colors duration-200"
+            aria-label="Email"
+          >
+            <Mail className="w-5 h-5" />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/vicentevenegas/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#B3B3B3] hover:text-[#00CE93] transition-colors duration-200"
+            aria-label="LinkedIn"
+          >
+            <Linkedin className="w-5 h-5" />
+          </a>
+          <a
+            href="https://github.com/leddd" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#B3B3B3] hover:text-[#00CE93] transition-colors duration-200"
+            aria-label="GitHub"
+          >
+            <Github className="w-5 h-5" />
+          </a>
+          <a
+            href="https://www.instagram.com/studiohothand"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#B3B3B3] hover:text-[#00CE93] transition-colors duration-200"
+            aria-label="Instagram"
+          >
+            <Instagram className="w-5 h-5" />
+          </a>
+        </div>
+      </div>
+    </section>
   );
 }

@@ -6,28 +6,31 @@ import { motion, type Variants } from 'framer-motion'
 type Props = {
   href: string
   title: string
-  summary: string
+  tags: string
   image?: string
   alt: string
   priority?: boolean
 }
 
-export default function ProjectCard({ href, title, summary, image, alt, priority }: Props) {
+export default function ProjectCard({ href, title, tags, image, alt, priority }: Props) {
   const variants: Variants = {
     hidden: { opacity: 0 },
     show: { opacity: 1, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } },
   }
   return (
     <motion.article
-      style={{ backgroundColor: '#111111', borderColor: '#2A2A2A' }}
-      whileHover={{ backgroundColor: '#252525ff', borderColor: '#3A3A3A' }}
+      style={{ backgroundColor: 'var(--card)', borderColor: 'var(--border)' }}
+      whileHover={{
+        backgroundColor: 'color-mix(in srgb, var(--card) 90%, var(--vv-accent) 10%)',
+        borderColor: 'color-mix(in srgb, var(--border) 60%, var(--vv-accent) 40%)',
+      }}
       transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-      className="rounded-2xl border overflow-hidden"
+      className="rounded-2xl border border-border bg-card overflow-hidden"
       variants={variants}
     >
       <Link
         href={href}
-        className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
+        className="block focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--vv-accent)] focus-visible:outline-offset-4"
       >
         {/* Image: only render when provided to avoid empty src */}
         {image ? (
@@ -45,9 +48,9 @@ export default function ProjectCard({ href, title, summary, image, alt, priority
 
         {/* Text: title + exactly two lines */}
         <div className="px-4 pb-4 pt-3">
-          <h3 className="text-[24px] font-semibold text-white">{title}</h3>
-          <p className="mt-1 text-[16px] leading-[1.5] text-[#9C9C9C] line-clamp-2">
-            {summary}
+          <h3 className="text-[24px] font-semibold text-[var(--vv-text-primary)]">{title}</h3>
+          <p className="mt-1 text-[16px] leading-[1.5] text-[color:var(--vv-text-secondary)] line-clamp-2">
+            {tags}
           </p>
         </div>
       </Link>

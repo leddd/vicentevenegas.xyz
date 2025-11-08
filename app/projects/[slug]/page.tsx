@@ -1,9 +1,10 @@
 // app/projects/[slug]/page.tsx
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { projects, getProject } from "@/lib/projects";
 import { ProjectBlocks } from "@/components/project-blocks";
+import { ImageWithFallback } from "@/components/figma/ImageWithFallback";
+import { MoreProjects } from "@/components/MoreProjects";
 
 type Params = { params: { slug: string } };
 
@@ -14,37 +15,56 @@ export async function generateStaticParams() {
 export function generateMetadata({ params }: Params): Metadata {
   const p = getProject(params.slug);
   if (!p) return {};
-  return { title: `${p.title} – Case Study`, description: p.summary, openGraph: { images: [p.cover] } };
+  return { title: `${p.title} - Case Study`, description: p.tags, openGraph: { images: [p.cover] } };
 }
 
 export default function ProjectPage({ params }: Params) {
   const p = getProject(params.slug);
   if (!p) return notFound();
+  const tagList = p.tags?.split(",").map((tag) => tag.trim()).filter(Boolean) ?? [];
 
   return (
-    <article className="container grid-6 gap-y-12 pb-24">
-      {/* Hero */}
-      <h1 className="col-span-6 lg:col-span-4 lg:col-start-2 text-[52px] font-bold text-center lg:text-left">{p.title}</h1>
-      <p className="col-span-6 lg:col-span-4 lg:col-start-2 text-center lg:text-left text-[20px] text-white/70 -mt-12">
-        {p.summary}
-      </p>
+    <main>
+      <section className="min-h-screen snap-section py-20 md:py-32 grid-overlay">
+        <div className="container grid-6 gap-y-10">
+          {/* Header */}
+          <div className="col-span-6 lg:col-span-4 lg:col-start-2">
+            <div className="text-[#00CE93] uppercase tracking-wider text-xs md:text-sm mb-4 label-glow font-mono">
+              Case Study
+            </div>
+            <h1 className="text-[#EDEDED] text-3xl md:text-4xl lg:text-5xl mb-0">{p.title}</h1>
+            {tagList.length > 0 && (
+              <div className="mt-4 flex flex-wrap gap-2">
+                {tagList.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 border border-[#00CE93]/30 text-[#00CE93] text-xs md:text-sm hover:border-[#00CE93]/60 hover:mint-glow transition-all duration-300 font-mono"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
 
-      {/* Cover */}
-      <div className="col-span-6 lg:col-span-4 lg:col-start-2">
-        <div className="relative rounded-2xl border border-[#2A2A2A] overflow-hidden">
-          <Image
-            src={p.cover}
-            alt={p.alt}
-            width={1600}
-            height={1200}
-            className="w-full h-auto object-cover"
-            sizes="(min-width:1024px) 896px, 100vw"
-          />
+          {/* Featured Image */}
+          <div className="col-span-6 lg:col-span-4 lg:col-start-2 mt-4 md:mt-0">
+            <div className="aspect-[3/2] overflow-hidden bg-[#1D3C31] border border-white/10 shadow-[0_25px_50px_rgba(0,0,0,0.45)]">
+              <ImageWithFallback src={p.cover} alt={p.alt} className="w-full h-full object-cover" />
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
 
       {/* Flexible content */}
-      {p.blocks && <ProjectBlocks blocks={p.blocks} />}
-    </article>
+      {p.blocks && (
+        <section className="container grid-6 gap-y-24 pb-40">
+          <ProjectBlocks blocks={p.blocks} />
+        </section>
+      )}
+      <div className="container pb-24">
+        <MoreProjects currentSlug={p.slug} />
+      </div>
+    </main>
   );
 }

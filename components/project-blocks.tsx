@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useState } from "react";
 import Image from "next/image";
 
@@ -17,9 +17,15 @@ export type Vid = {
 export type Block =
   | { type: "text"; heading?: string; body: string }
   | { type: "image"; image: Img }
-  | { type: "twoUp"; images?: [Img, Img]; videos?: [Vid, Vid] } // 👈 allow videos too
+  | { type: "twoUp"; images?: [Img, Img]; videos?: [Vid, Vid] }
   | { type: "grid2x2"; images: [Img, Img, Img, Img] }
-  | { type: "textImage"; side?: "left" | "right"; heading?: string; body: string; image: Img }
+  | {
+      type: "textImage";
+      side?: "left" | "right";
+      heading?: string;
+      body: string;
+      image: Img;
+    }
   | {
       type: "video";
       src: string;
@@ -30,8 +36,13 @@ export type Block =
       loop?: boolean;
       playsInline?: boolean;
       controls?: boolean;
-    }; // aspect is now inferred
+    }
+  | {
+      type: "spacer";
+      height?: number; // height in px, optional
+    };
 
+// Single video block, auto aspect
 function AutoAspectVideo({
   src,
   poster,
@@ -55,7 +66,7 @@ function AutoAspectVideo({
   return (
     <div className="col-span-6 lg:col-span-4 lg:col-start-2">
       <div
-        className="relative rounded-2xl border border-[#2A2A2A] overflow-hidden"
+        className="relative border border-border bg-card overflow-hidden"
         style={{ aspectRatio: ratio }}
       >
         <video
@@ -86,7 +97,10 @@ function AutoAspectVideo({
 function TwoUpAutoVideo({ v }: { v: Vid }) {
   const [ratio, setRatio] = useState<number>(9 / 16); // good default for vertical clips
   return (
-    <div className="relative rounded-2xl border border-[#2A2A2A] overflow-hidden" style={{ aspectRatio: ratio }}>
+    <div
+      className="relative border border-border bg-card overflow-hidden"
+      style={{ aspectRatio: ratio }}
+    >
       <video
         autoPlay={v.autoplay}
         muted={v.muted ?? true}
@@ -98,7 +112,8 @@ function TwoUpAutoVideo({ v }: { v: Vid }) {
         poster={v.poster}
         onLoadedMetadata={(e) => {
           const el = e.currentTarget;
-          if (el.videoWidth && el.videoHeight) setRatio(el.videoWidth / el.videoHeight);
+          if (el.videoWidth && el.videoHeight)
+            setRatio(el.videoWidth / el.videoHeight);
         }}
         className="absolute inset-0 w-full h-full object-cover"
       >
@@ -114,9 +129,18 @@ export function ProjectBlocks({ blocks }: { blocks: Block[] }) {
       {blocks.map((b, i) => {
         if (b.type === "text") {
           return (
-            <section key={i} className="col-span-6 lg:col-span-4 lg:col-start-2">
-              {b.heading && <h2 className="text-[28px] font-semibold mb-3">{b.heading}</h2>}
-              <p className="text-[18px] leading-[1.7] text-white/80">{b.body}</p>
+            <section
+              key={i}
+              className="col-span-6 lg:col-span-4 lg:col-start-2 space-y-4"
+            >
+              {b.heading && (
+                <h2 className="text-3xl font-normal text-[color:var(--vv-text-primary)]">
+                  {b.heading}
+                </h2>
+              )}
+              <p className="vv-body">
+                {b.body}
+              </p>
             </section>
           );
         }
@@ -124,8 +148,11 @@ export function ProjectBlocks({ blocks }: { blocks: Block[] }) {
         if (b.type === "image") {
           const img = b.image;
           return (
-            <div key={i} className="col-span-6 lg:col-span-4 lg:col-start-2">
-              <div className="relative rounded-2xl border border-[#2A2A2A] overflow-hidden">
+            <div
+              key={i}
+              className="col-span-6 lg:col-span-4 lg:col-start-2"
+            >
+              <div className="relative border border-border bg-card overflow-hidden">
                 <Image
                   src={img.src}
                   alt={img.alt}
@@ -143,7 +170,10 @@ export function ProjectBlocks({ blocks }: { blocks: Block[] }) {
           const hasVideos = Array.isArray(b.videos) && b.videos.length === 2;
           if (hasVideos) {
             return (
-              <div key={i} className="col-span-6 lg:col-span-4 lg:col-start-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div
+                key={i}
+                className="col-span-6 lg:col-span-4 lg:col-start-2 grid grid-cols-1 md:grid-cols-2 gap-6"
+              >
                 {b.videos!.map((v, k) => (
                   <TwoUpAutoVideo key={k} v={v} />
                 ))}
@@ -152,9 +182,15 @@ export function ProjectBlocks({ blocks }: { blocks: Block[] }) {
           }
           // Default: images
           return (
-            <div key={i} className="col-span-6 lg:col-span-4 lg:col-start-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div
+              key={i}
+              className="col-span-6 lg:col-span-4 lg:col-start-2 grid grid-cols-1 md:grid-cols-2 gap-6"
+            >
               {b.images!.map((img, k) => (
-                <div key={k} className="relative rounded-2xl border border-[#2A2A2A] overflow-hidden">
+                <div
+                  key={k}
+                  className="relative border border-border bg-card overflow-hidden"
+                >
                   <Image
                     src={img.src}
                     alt={img.alt}
@@ -171,9 +207,15 @@ export function ProjectBlocks({ blocks }: { blocks: Block[] }) {
 
         if (b.type === "grid2x2") {
           return (
-            <div key={i} className="col-span-6 lg:col-span-4 lg:col-start-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div
+              key={i}
+              className="col-span-6 lg:col-span-4 lg:col-start-2 grid grid-cols-1 sm:grid-cols-2 gap-6"
+            >
               {b.images.map((img, k) => (
-                <div key={k} className="relative rounded-2xl border border-[#2A2A2A] overflow-hidden">
+                <div
+                  key={k}
+                  className="relative border border-border bg-card overflow-hidden"
+                >
                   <Image
                     src={img.src}
                     alt={img.alt}
@@ -192,9 +234,12 @@ export function ProjectBlocks({ blocks }: { blocks: Block[] }) {
           const leftImage = b.side === "left";
           const img = b.image;
           return (
-            <div key={i} className="col-span-6 lg:col-span-4 lg:col-start-2 grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+            <div
+              key={i}
+              className="col-span-6 lg:col-span-4 lg:col-start-2 grid grid-cols-1 md:grid-cols-2 gap-6 items-start"
+            >
               {leftImage && (
-                <div className="relative rounded-2xl border border-[#2A2A2A] overflow-hidden">
+                <div className="relative border border-border bg-card overflow-hidden">
                   <Image
                     src={img.src}
                     alt={img.alt}
@@ -205,12 +250,18 @@ export function ProjectBlocks({ blocks }: { blocks: Block[] }) {
                   />
                 </div>
               )}
-              <div>
-                {b.heading && <h2 className="text-[28px] font-semibold mb-3">{b.heading}</h2>}
-                <p className="text-[18px] leading-[1.7] text-white/80">{b.body}</p>
+              <div className="space-y-4">
+                {b.heading && (
+                  <h2 className="text-[28px] font-medium text-[color:var(--vv-text-primary)]">
+                    {b.heading}
+                  </h2>
+                )}
+                <p className="vv-body">
+                  {b.body}
+                </p>
               </div>
               {!leftImage && (
-                <div className="relative rounded-2xl border border-[#2A2A2A] overflow-hidden">
+                <div className="relative border border-border bg-card overflow-hidden">
                   <Image
                     src={img.src}
                     alt={img.alt}
@@ -237,6 +288,17 @@ export function ProjectBlocks({ blocks }: { blocks: Block[] }) {
               loop={b.loop}
               playsInline={b.playsInline}
               controls={b.controls}
+            />
+          );
+        }
+
+        if (b.type === "spacer") {
+          return (
+            <div
+              key={i}
+              className="col-span-6 lg:col-span-4 lg:col-start-2"
+              style={{ height: b.height ? `${b.height}px` : "32px" }} // default 32px
+              aria-hidden="true"
             />
           );
         }
