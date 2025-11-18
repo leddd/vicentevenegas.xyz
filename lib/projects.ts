@@ -51,6 +51,7 @@ export function getRelatedProjects(currentSlug: string, count = 3) {
 }
 
 export const projects: Project[] = [
+  // djavu
   {
     slug: "djavu",
     title: "Djavu",
@@ -154,6 +155,7 @@ export const projects: Project[] = [
     ],
   },
 
+  // Carvuk
   {
     slug: "carvuk",
     title: "Carvuk",
@@ -270,6 +272,7 @@ export const projects: Project[] = [
 
   },
 
+  // Wirun
   {
     slug: "wirun",
     title: "Wirun",
@@ -373,6 +376,7 @@ export const projects: Project[] = [
 
   },
 
+  // Cabron
   {
     slug: "cabron",
     title: "Cabrón",
@@ -508,15 +512,16 @@ export const projects: Project[] = [
         },
       },
     ],
-  }
-  , 
+  }, 
+
+  // Blitz
   {
     slug: "blitz",
     title: "Blitz",
 
     cover: "/images/projects/blitz/cover.png",
     alt: "Blitz triangular box with crowned logotype and checker accents.",
-    date: "2022-11",
+    date: "2022-1",
     tags: "Branding, Identity, Packaging",
 
     // blocks: [...]
@@ -608,11 +613,12 @@ export const projects: Project[] = [
 
   },
 
+  // Studio Hot Hand
   {
       slug: "studio-hot-hand",
       title: "Studio Hot Hand",
 
-      cover: "/images/projects/studio-hot-hand/COVER.png",
+      cover: "/images/projects/studio-hot-hand/FLYER.jpg",
       alt: "Studio Hot Hand flyer on hot pink paper with bold black type.",
       date: "2025-01",
       tags: "Creative Direction, Graphic Design, Illustration",
@@ -625,14 +631,7 @@ export const projects: Project[] = [
             "In 2025 I co-founded Studio Hot Hand with Javiera Melo, a boutique design studio where we provide creative services and produce original work. From editorial and graphic design to animation, 3D, illustration, and creative direction — these are selected projects.",
         },
 
-        // Brand & worldbuilding
-        {
-          type: "image",
-          image: {
-            src: "/images/projects/studio-hot-hand/FLYER.jpg",
-            alt: "Hot Hand promotional flyer with bold type and satisfaction guarantee tagline.",
-          },
-        },
+
 
         {
           type: "spacer",
@@ -779,9 +778,9 @@ export const projects: Project[] = [
             "Studio Hot Hand mixes commissioned and self-initiated work — balancing clear, functional design with playful experimentation across media. These projects show the mix of worlds we like to build: tactile, direct, and slightly surreal.",
         },
       ],
-  }
-    ,
+  },
 
+  // La Piel Tejida
   {
     slug: "la-piel-tejida",
     title: "La Piel Tejida",
@@ -860,14 +859,15 @@ export const projects: Project[] = [
     ],
   },
 
-
+  // Loop Bench
+  /*
   {
       slug: "loop-bench",
       title: "Loop Bench",
 
       cover: "/images/projects/loop-bench/cover.png",
       alt: "Two-seat plywood bench assembled with zip ties.",
-      date: "2022-3",
+      date: "2022-11",
       tags: "Industrial Design, Prototyping, CAD/CAM",
 
       // blocks: [...]
@@ -936,7 +936,244 @@ export const projects: Project[] = [
 
       ],
       
-    },
+  },
+  */
+  // Registro Civil
+  {
+    slug: "registro-civil",
+    title: "Registro Civil",
+    cardImage: "/images/projects/registrocivil/cover.png",
+    cover: "/images/projects/registrocivil/hero.png",
+    alt: "Redesigned Registro Civil trámites homepage with improved information architecture.",
+    date: "2025-11",
+    tags: "UX Research, UI Design, Public Services",
+
+    blocks: [
+      {
+        type: "text",
+        heading: "Overview",
+        body:
+          "RegistroCivil.cl is one of Chile’s most widely used public service platforms. It centralizes identity and civil-status services, digital certificates, and appointment scheduling. Because many procedures require ClaveÚnica — the country’s digital identity credential — the platform is critical to millions of residents and Chileans abroad. This redesign was my capstone project, where I led the entire process end-to-end: research, heuristic evaluation, surveys, IA redesign, wireframing, UI system, prototyping, and usability testing.",
+      },
+
+      {
+        type: "spacer",
+      },
+
+      // Problem
+      {
+        type: "text",
+        heading: "The problem",
+        body:
+          "Although the site handles essential tasks, its experience had grown fragmented and inconsistent. Users struggled with: Unclear appointment availability and low visibility of confirmations. Repeated data entry, especially with ClaveÚnica and personal details. Disjointed navigation between domains (Registro Civil, ChileAtiende), breaking flow. Poor information hierarchy, with mixed categories and action labels that did not match user mental models. The result: longer task times, unnecessary errors, and significant drop-off during key procedures.",
+      },
+
+      {
+        type: "spacer",
+      },
+      {
+        type: "text",
+        heading: "Heuristic Evaluation",
+        body:
+          "I evaluated the platform using Nielsen’s 10 heuristics and relevant UX laws (Fitts, Miller, Jakob’s Law, Von Restorff, Aesthetic-Usability Effect). Key findings included: Fragmented login and no way to undo or edit steps (Control & Freedom). Inconsistent labeling and mixed icon styles (Consistency & Standards). Small action targets, especially critical buttons (Fitts’ Law). Overloaded pages with dozens of items and no categorization (Miller’s Law). Red used for low-priority actions, hurting visual hierarchy (Von Restorff).",
+      },
+      // Original UI reference
+      {
+        type: "image",
+        image: {
+          src: "/images/projects/registrocivil/07-original-ui-1.png",
+          alt: "Existing Registro Civil certificate interface with inconsistent layout.",
+        },
+      },
+
+      {
+        type: "image",
+        image: {
+          src: "/images/projects/registrocivil/08-original-ui-2.png",
+          alt: "Existing appointment scheduling screen with limited filtering.",
+        },
+      },
+
+      {
+        type: "spacer",
+      },
+
+      // Survey
+      {
+        type: "text",
+        heading: "Survey (40 respondents)",
+        body:
+          "Goals: understand user behavior, trust, and pain points. Insights: 75% had used the site in the last 6 months. 73% took more than 5 minutes to complete their last task. Nearly half had to repeat steps or re-enter data. One-third struggled to compare offices and appointment times. Users described the experience as “starting from zero every time.”",
+      },
+      {
+        type: "image",
+        image: {
+          src: "/images/projects/registrocivil/02-survey-time-to-complete.png",
+          alt: "User survey results showing time required to complete a task on the old Registro Civil platform.",
+        },
+      },
+
+      {
+        type: "spacer",
+      },
+
+      // Tree testing
+      {
+        type: "text",
+        heading: "Tree testing",
+        body:
+          "Two tasks: find a birth certificate and book an ID renewal appointment. Results showed deep navigation mismatches: 50% success for certificate flow, and only 20% for appointments. Most failures originated from misleading labels (e.g., ‘Trámites’ acting as a guide instead of an actionable section).",
+      },
+      {
+        type: "twoUp",
+        images: [
+          {
+            src: "/images/projects/registrocivil/03-tree-test-certificates.png",
+            alt: "Tree test visualization for certificate task — 50% completion.",
+          },
+          {
+            src: "/images/projects/registrocivil/04-tree-test-appointments.png",
+            alt: "Tree test visualization for appointment task — 20% completion.",
+          },
+        ],
+      },
+
+      {
+        type: "spacer",
+      },
+
+
+
+      {
+        type: "text",
+        heading: "Design Goals",
+        body:
+          "From the research, I established four goals: Reduce repetition through unified login and data persistence. Align navigation with user objectives, not internal categories. Simplify appointment scheduling with filters, maps, and clearer availability. Create a consistent, accessible visual system that matches government standards.",
+      },
+
+      {
+        type: "spacer",
+      },
+      // IA redesign
+      {
+        type: "text",
+        heading: "Information architecture",
+        body:
+          "The IA was reorganized around user goals, not actions. Examples: “Cédula de Identidad” replaces “Agendar Hora” as the entry point. Certificates, appointments, and identity services are grouped by intention. The misleading “Trámites” label was replaced, eliminating a major source of failed navigation. I also added: Shortcuts for high-frequency tasks Integrated explanations directly inside user flows, instead of sending users to separate pages Clear hierarchy for pages containing legal or process information",
+      },
+      
+      {
+        type: "image",
+        image: {
+          src: "/images/projects/registrocivil/05-ia-original.png",
+          alt: "Original Registro Civil information architecture diagram showing mixed categories and deep nesting.",
+        },
+      },
+      {
+        type: "image",
+        image: {
+          src: "/images/projects/registrocivil/06-ia-redesign.png",
+          alt: "Redesigned information architecture organized by user intent.",
+        },
+      },
+
+      {
+        type: "spacer",
+      },
+
+      {
+        type: "text",
+        heading: "Interaction & Flow Improvements",
+        body:
+          "Reduced steps to five. Added autofill where appropriate. Consolidated instructions and action into one screen. Appointment Scheduling Added filters (city, region, morning/afternoon, “next available”). Introduced a map view to compare offices visually. Made availability more transparent and easier to scan. UI & Design System I built a complete UI kit inspired by government guidelines: Museo Sans for legibility and institutional coherence. 12-column layout for responsive behavior. Accessible color palette with semantic states (success, warning, error). Material Design iconography with unified style. Components for forms, buttons, navigation, pop-ups, breadcrumbs, search, and date pickers. I also defined voice and tone guidelines: clear, brief, neutral, and formally correct — essential for government services.",
+      },
+
+      // Hi-fi redesign
+      {
+        type: "spacer",
+      },
+
+      {
+        type: "image",
+        image: {
+          src: "/images/projects/registrocivil/09-hifi-tramites.png",
+          alt: "Redesigned trámites landing page with categorized shortcuts.",
+        },
+      },
+
+      {
+        type: "twoUp",
+        images: [
+          {
+            src: "/images/projects/registrocivil/10-hifi-identidad.png",
+            alt: "Redesigned identity document page with clear hierarchy.",
+          },
+          {
+            src: "/images/projects/registrocivil/11-hifi-cedula.png",
+            alt: "Office selection screen with map-based comparison.",
+          },
+        ],
+      },
+
+      {
+        type: "image",
+        image: {
+          src: "/images/projects/registrocivil/12-hifi-oficina.png",
+          alt: "Redesigned office selection screen with map-based comparison.",
+        },
+      },
+
+      {
+        type: "twoUp",
+        images: [
+          {
+            src: "/images/projects/registrocivil/13-hifi-hora.png",
+            alt: "Day and time selection with improved availability scanning.",
+          },
+          {
+            src: "/images/projects/registrocivil/14-hifi-exito.png",
+            alt: "Identity category layout with reorganized labels and tasks.",
+          },
+        ],
+      },
+
+      {
+        type: "spacer",
+      },
+      {
+        type: "text",
+        heading: "Usability testing",
+        body:
+          "I conducted 4 moderated and 10 remote usability tests on both redesigned flows. Results: 100% success on both tasks. Certificate flow: 22 seconds average, down from >1 minute. Appointment flow: 36 seconds average, down significantly from baseline. Key insights: Users preferred starting via shortcuts. The new category-based IA was immediately understood. Combining instructions + action in one page reduced friction. A few users requested more visibility in confirmation screens (easily fixable).",
+      },
+
+      {
+        type: "spacer",
+      },
+
+      // Outcome
+      {
+        type: "text",
+        heading: "Outcome",
+        body:
+          "The redesign delivered measurable improvements: Clearer navigation aligned to user intent Reduced cognitive load Faster completion of critical tasks Stronger trust through consistent UI and integrated help Better accessibility and mobile responsiveness This project demonstrated how UX design can elevate public digital services by reducing friction and empowering users to complete essential procedures with confidence.",
+      },
+
+      {
+        type: "spacer",
+      },
+
+      {
+        type: "text",
+        heading: "Reflection",
+        body:
+          "Working end-to-end allowed me to understand the full depth of public-sector UX: complex logic, high stakes, broad user diversity, and the need for clarity and trust. Key learnings: Small labeling decisions can drastically influence task success. Integrating information directly into the flow reduces confusion. Accessibility and visual consistency aren’t just aesthetic; they build legitimacy. Public services benefit greatly from transparency in scheduling and availability. If I continued, I would explore: A more advanced appointment system with real-time availability Multilingual support Mobile-first refinements for users with lower digital proficiency",
+      },
+    ],
+  },
+
+
+  
 ];
 
 export function getProject(slug: string) {
