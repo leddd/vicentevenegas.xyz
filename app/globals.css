@@ -56,9 +56,9 @@
   --vv-accent-muted: #002820;
 
   /* Layout Tokens */
-  --vv-margin-desktop: 220px;
+  --vv-margin-desktop: 40px;
   --vv-gutter: 20px;
-  --vv-content-max: 1440px;
+  --vv-content-max: 1920px;
   --vv-anchor-offset: 96px;
 
   /* Typography Tokens */
@@ -80,10 +80,10 @@
 
   /* Noise and Grid */
   --vv-noise-opacity: 0.03;
-  --vv-grid-opacity: 0.015;
+  --vv-grid-opacity: 0.06;
 
   /* Derived layout values */
-  --vv-margin-fluid: clamp(16px, 6vw, var(--vv-margin-desktop));
+  --vv-margin-fluid: clamp(8px, 2.5vw, var(--vv-margin-desktop));
   --vv-gutter-fluid: clamp(12px, 1.8vw, var(--vv-gutter));
 }
 
