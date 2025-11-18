@@ -16,7 +16,7 @@ export function ProjectGrid() {
   return (
     <section
       id="work"
-      className="min-h-screen snap-section px-6 md:px-12 lg:px-[220px] py-20 md:py-32 grid-overlay scroll-mt-[-150px]"
+      className="min-h-screen snap-section px-6 md:px-12 lg:px-[40px] py-20 md:py-32 grid-overlay scroll-mt-[-150px]"
     >
       {/* Header */}
       <div className="mb-12 md:mb-16">

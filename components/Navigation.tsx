@@ -50,7 +50,7 @@ export function Navigation() {
       }`}
       style={{ fontFamily: 'Space Mono, monospace' }}
     >
-      <div className="mx-auto px-6 md:px-12 lg:px-[220px] py-6">
+      <div className="mx-auto px-6 md:px-12 lg:px-[40px] py-6">
         <div className="flex justify-between items-center">
           <button
             onClick={handleHomeNav}

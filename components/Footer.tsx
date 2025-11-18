@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <section
       id="contact"
-      className="min-h-screen snap-section bg-transparent flex flex-col justify-between px-6 md:px-12 lg:px-[220px] pt-24 md:pt-48 pb-12 md:pb-8 grid-overlay scroll-mt-[-220px]"
+      className="min-h-screen snap-section bg-transparent flex flex-col justify-between px-6 md:px-12 lg:px-[40px] pt-24 md:pt-48 pb-12 md:pb-8 grid-overlay scroll-mt-[-220px]"
     >
       {/* Top Section */}
       <div>

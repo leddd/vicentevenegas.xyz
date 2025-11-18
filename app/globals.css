@@ -56,9 +56,9 @@
   --vv-accent-muted: #002820;
 
   /* Layout Tokens */
-  --vv-margin-desktop: 40px;
+  --vv-margin-desktop: 80px;
   --vv-gutter: 20px;
-  --vv-content-max: 1920px;
+  --vv-content-max: 1440px;
   --vv-anchor-offset: 96px;
 
   /* Typography Tokens */
